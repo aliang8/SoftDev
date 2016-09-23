@@ -8,16 +8,18 @@
 
   <body>
     <h1>Occupation Percentages</h1>
-    <h2> {{message}} </h2> 
-    <table>
+    <h2> Random Occupation Selector : {{message}} </h2> 
+    <table border = "1">
       <tr>
 	<th>Occupations</th>
 	<th>Percentages</th>
+	<th>Helpful Links!!!</th>
       </tr>
-      {% for key, value in file.iteritems() %}
+      {% for keys, values in file.iteritems() %}
       <tr>
 	<td> {{keys}} </td>
-	<td> {{values}} </td> 
+	<td> {{values[0]}} </td>
+	<td> <a href = "{{values[1]}}">{{values[1]}}</a> </td>
       </tr>
       {% endfor %}
     </table>

@@ -15,7 +15,7 @@ with open('occupations.csv','rb') as f:
 @app.route("/occupations")
 
 def occu_table():
-    return render_template('table.html',  message = work1.randOccupation(), file = file)
+    return render_template('main.html',  message = work1.randOccupation(), file = file)
     
 if __name__ == '__main__': 
     app.debug = True #save file, restart webserver
