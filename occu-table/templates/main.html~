@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>
+      Occupations + Percentages
+    </title>
+  </head>
+
+  <body>
+    <h1>Occupation Percentages</h1>
+    <h2> {{message}} </h2> 
+    <table>
+      <tr>
+	<th>Occupations</th>
+	<th>Percentages</th>
+      </tr>
+      {% for key, value in file.iteritems() %}
+      <tr>
+	<td> {{keys}} </td>
+	<td> {{values}} </td> 
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>

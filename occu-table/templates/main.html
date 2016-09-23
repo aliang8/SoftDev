@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>
+      Occupations + Percentages
+    </title>
+  </head>
+
+  <body>
+    <h1>Occupation Percentages</h1>
+    <h2> Random Occupation Selector : {{message}} </h2> 
+    <table border = "1">
+      <tr>
+	<th>Occupations</th>
+	<th>Percentages</th>
+      </tr>
+      {% for keys, values in file.iteritems() %}
+      <tr>
+	<td> {{keys}} </td>
+	<td> {{values}} </td>
+      </tr>
+      {% endfor %}
+    </table>
+  </body>
+</html>
