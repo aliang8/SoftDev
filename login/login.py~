@@ -1,0 +1,21 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__) 
+
+@app.route("/")
+@app.route("/login/")
+def login():
+    print request
+    print request.headers
+    print app
+    return render_template('login.html')
+
+@app.route("/authenticate/")
+def auth():
+    print request.args
+    print request.args['user'] ##works like a dictionary
+    return "OK"
+
+if __name__ == '__main__': 
+    app.debug = True #save file, restart webserver
+    app.run() 

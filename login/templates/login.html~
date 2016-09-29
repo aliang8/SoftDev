@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+      Form Classwork
+    </title>
+  </head>
+
+  <body>
+    <form action = "/authenticate/" method = "POST">
+      <center><h1>This is a simple form</h1></center>
+      Username: <input type = "text" name = "user"><br>
+      <input type = "submit">
+    </form>
+  </body>
+</html>
+
+    
