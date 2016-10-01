@@ -1,6 +1,15 @@
 from flask import Flask, render_template, request
+import csv
+import hashlib
+import os.path
 
 app = Flask(__name__) 
+if not(os.path.isfile('data/credentials.csv')):
+    file = open('data/credentials.csv','w')
+    header = ["Username","Password","HashUser","HashPass"]
+    writer = csv.writer(file, delimiter = ",")
+    writer.writerow(header)
+    file.close()
 
 @app.route("/")
 @app.route("/login/")
@@ -10,12 +19,44 @@ def login():
     print app
     return render_template('login.html')
 
-@app.route("/authenticate/")
+@app.route("/authenticate/", methods = ['GET','POST'])
 def auth():
-    print request.args
-    print request.args['user'] ##works like a dictionary
-    return "OK"
+    if request.method == 'GET':
+        print request.args
+        print request.args['user']
+        print request.args['pass']
+        if (request.args['user'] == "Anthony" and request.args['pass'] == "Liang"):
+            return "Success"
+        else:
+            return "Failure"
+    elif request.method == 'POST':
+        user = request.form['user']
+        pasz = request.form['pass']
+        userhash = hashlib.sha224(request.form['user']).hexdigest()
+        paszhash = hashlib.sha224(request.form['pass']).hexdigest()    
 
+        if request.form['submit'] == 'Login':
+            with open("data/credentials.csv", "r") as c:
+                reader = csv.reader(c)
+                for row in reader:
+                    if row[2] == userhash and row[3] == paszhash:
+                        return render_template("login.html", message = "Login successful! Congratulations")
+                return render_template("login.html", message = "Account was not found. Please try again.")
+            c.close()  
+        if request.form['submit'] == 'Register':
+            with open("data/credentials.csv", "r") as c:
+                reader = csv.reader(c)
+                for row in reader:
+                    if row[2] == userhash:
+                        return render_template("login.html", message = "This user is already registered!")
+            c.close()
+            with open("data/credentials.csv", "a") as c:
+                writer = csv.writer(c, delimiter = ",")
+                credentials = [user,pasz,userhash,paszhash]
+                writer.writerow(credentials)
+                return render_template("login.html", message = "Register successful. You may proceed to login")
+            c.close()
+                                    
 if __name__ == '__main__': 
     app.debug = True #save file, restart webserver
     app.run() 

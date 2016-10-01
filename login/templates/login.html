@@ -7,11 +7,13 @@
   </head>
 
   <body>
+    <h3>{{message}}</h3>
     <form action = "/authenticate/" method = "POST">
       Enter your username and password: <br>
       Username: <input type = "text" name = "user"><br>
       Password: <input type = "text" name = "pass"><br>
-      <input type = "submit">
+      <input type = "submit" name = "submit" value = "Login">
+      <input type = "submit" name = "submit" value = "Register">
     </form>
   </body>
 </html>
